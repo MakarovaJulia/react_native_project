@@ -1,15 +1,17 @@
-import React from 'react';
-import {Button} from 'react-native';
+import React, {useEffect} from 'react';
+import {Button, Linking} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import AboutScreen from './screens/AboutScreen';
-import HomeScreen from './screens/HomeScreen';
-import NewsScreen from './screens/NewsScreen';
-import ChatScreen from './screens/ChatScreen';
+import AboutScreen from './src/screens/AboutScreen';
+import HomeScreen from './src/screens/HomeScreen';
+import NewsScreen from './src/screens/NewsScreen';
+import ChatScreen from './src/screens/ChatScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import TodoScreen from './screens/TodoScreen';
+import TodoScreen from './src/screens/TodoScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {DeepLinking} from './src/navigation/DeepLinking';
+import Navigation from './src/navigation/Navigation';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,9 +83,19 @@ const HomeStack = () => {
 };
 
 const App = () => {
+  useEffect(() => {
+    Linking.getInitialURL().then(async deepLinkInitialURL => {
+      if (deepLinkInitialURL) {
+        await DeepLinking.handleInitialNavigate(deepLinkInitialURL);
+      }
+    });
+  }, []);
+
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <NavigationContainer>
+      <NavigationContainer
+        linking={DeepLinking.linking}
+        ref={Navigation.navigationRef}>
         <Stack.Navigator>
           <Stack.Screen
             name={'Tab'}
