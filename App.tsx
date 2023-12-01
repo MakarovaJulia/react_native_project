@@ -12,6 +12,9 @@ import TodoScreen from './src/screens/TodoScreen';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {DeepLinking} from './src/navigation/DeepLinking';
 import Navigation from './src/navigation/Navigation';
+import {observer} from 'mobx-react';
+import {useRootStore} from './src/hooks/useRootStore';
+import {LangType} from './src/modules/lang/LangType';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -82,13 +85,19 @@ const HomeStack = () => {
   );
 };
 
-const App = () => {
+const App = observer(() => {
+  const {langStore} = useRootStore();
+
   useEffect(() => {
     Linking.getInitialURL().then(async deepLinkInitialURL => {
       if (deepLinkInitialURL) {
         await DeepLinking.handleInitialNavigate(deepLinkInitialURL);
       }
     });
+  }, []);
+
+  useEffect(() => {
+    langStore.setLang(LangType.RU);
   }, []);
 
   return (
@@ -106,6 +115,6 @@ const App = () => {
       </NavigationContainer>
     </GestureHandlerRootView>
   );
-};
+});
 
 export default App;
