@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {Button, Linking} from 'react-native';
+import {ActivityIndicator, Button, Linking} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -95,6 +95,10 @@ const App = observer(() => {
       }
     });
   }, []);
+
+  useEffect(() => {
+    langStore.getLang();
+  }, [langStore]);
 
   useEffect(() => {
     langStore.setLang(LangType.RU);

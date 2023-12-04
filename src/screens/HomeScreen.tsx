@@ -10,9 +10,7 @@ const HomeScreen = observer(() => {
   const {langStore} = useRootStore();
   const {t} = useTranslation();
 
-  useEffect(() => {
-    langStore.getLang();
-  }, [langStore]);
+
 
   const handleChangeLang = async () => {
     await langStore.changeLang(
