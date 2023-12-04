@@ -1,0 +1,7 @@
+{
+  "main": {
+    "header": "Главный экран",
+    "aboutScreen": "О приложении",
+    "settingsScreen": "Настройки"
+  }
+}

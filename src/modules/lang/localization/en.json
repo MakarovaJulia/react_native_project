@@ -1,0 +1,7 @@
+{
+  "main": {
+    "header": "Home",
+    "aboutScreen": "About App",
+    "settingsScreen": "Settings"
+  }
+}
