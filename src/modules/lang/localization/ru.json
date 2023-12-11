@@ -2,6 +2,9 @@
   "main": {
     "header": "Главный экран",
     "aboutScreen": "О приложении",
-    "settingsScreen": "Настройки"
+    "homeScreen": {
+      "btnTheme": "Изменить тему",
+      "btnLang": "Изменить язык"
+    }
   }
 }

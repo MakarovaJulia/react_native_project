@@ -2,6 +2,9 @@
   "main": {
     "header": "Home",
     "aboutScreen": "About App",
-    "settingsScreen": "Settings"
+    "homeScreen": {
+        "btnTheme": "Change theme",
+        "btnLang": "Change lang"
+    }
   }
 }
