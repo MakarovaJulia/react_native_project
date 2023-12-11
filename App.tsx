@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ActivityIndicator, Button, Linking} from 'react-native';
+import {Button, Linking} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -15,19 +15,36 @@ import Navigation from './src/navigation/Navigation';
 import {observer} from 'mobx-react';
 import {useRootStore} from './src/hooks/useRootStore';
 import {LangType} from './src/modules/lang/LangType';
+import {ThemeProvider} from './src/modules/theme/ThemeProvider';
+import {useTheme} from './src/modules/theme/hooks/useTheme';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+  const {Colors} = useTheme();
+  const colors = Colors;
   return (
-    <Tab.Navigator initialRouteName={'Home'}>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveBackgroundColor: colors.backgroundPrimary,
+        tabBarInactiveBackgroundColor: colors.backgroundPrimary,
+        tabBarActiveTintColor: colors.accentPrimary,
+        tabBarInactiveTintColor: colors.accentSecondary,
+        headerStyle: {backgroundColor: colors.overlay},
+        headerTitleStyle: {
+          color: colors.textPrimary,
+        },
+      }}
+      initialRouteName={'Home'}>
       <Tab.Screen
         name="Home"
         component={HomeStack}
         options={{
           headerShown: false,
-          tabBarIcon: () => <MaterialIcons name="home" size={18} />,
+          tabBarIcon: () => (
+            <MaterialIcons name="home" size={18} color={colors.accentPrimary} />
+          ),
         }}
       />
       <Tab.Screen
@@ -35,7 +52,13 @@ const TabNavigation = () => {
         component={NewsScreen}
         options={{
           headerTitleAlign: 'center',
-          tabBarIcon: () => <MaterialIcons name="newspaper" size={18} />,
+          tabBarIcon: () => (
+            <MaterialIcons
+              name="newspaper"
+              size={18}
+              color={colors.accentPrimary}
+            />
+          ),
         }}
       />
       <Tab.Screen
@@ -43,7 +66,9 @@ const TabNavigation = () => {
         component={ChatScreen}
         options={{
           headerTitleAlign: 'center',
-          tabBarIcon: () => <MaterialIcons name="chat" size={18} />,
+          tabBarIcon: () => (
+            <MaterialIcons name="chat" size={18} color={colors.accentPrimary} />
+          ),
         }}
       />
       <Tab.Screen
@@ -51,7 +76,9 @@ const TabNavigation = () => {
         component={TodoScreen}
         options={{
           headerTitleAlign: 'center',
-          tabBarIcon: () => <MaterialIcons name="list" size={18} />,
+          tabBarIcon: () => (
+            <MaterialIcons name="list" size={18} color={colors.accentPrimary} />
+          ),
         }}
       />
     </Tab.Navigator>
@@ -59,6 +86,8 @@ const TabNavigation = () => {
 };
 
 const HomeStack = () => {
+  const {Colors} = useTheme();
+  const colors = Colors;
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -66,12 +95,18 @@ const HomeStack = () => {
         component={HomeScreen}
         options={(props: any) => ({
           headerTitleAlign: 'center',
-          headerTitle: () => <MaterialIcons name="sunny" size={24} />,
+          headerTitle: () => (
+            <MaterialIcons
+              name="sunny"
+              size={24}
+              color={colors.accentPrimary}
+            />
+          ),
           headerRight: () => (
             <Button
               onPress={() => props.navigation.navigate('About')}
               title="About app"
-              color="#000"
+              color={colors.accentPrimary}
             />
           ),
         })}
@@ -105,19 +140,21 @@ const App = observer(() => {
   }, []);
 
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
-      <NavigationContainer
-        linking={DeepLinking.linking}
-        ref={Navigation.navigationRef}>
-        <Stack.Navigator>
-          <Stack.Screen
-            name={'Tab'}
-            component={TabNavigation}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </GestureHandlerRootView>
+    <ThemeProvider>
+      <GestureHandlerRootView style={{flex: 1}}>
+        <NavigationContainer
+          linking={DeepLinking.linking}
+          ref={Navigation.navigationRef}>
+          <Stack.Navigator>
+            <Stack.Screen
+              name={'Tab'}
+              component={TabNavigation}
+              options={{headerShown: false}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </GestureHandlerRootView>
+    </ThemeProvider>
   );
 });
 
