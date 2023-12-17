@@ -26,9 +26,9 @@ const TodoDoneScreen = observer(({navigation}: any) => {
         data={todos}
         renderItem={({item}) => (
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <Text>{item.text}</Text>
+            <Text style={{fontFamily: 'Montserrat-Regular'}}>{item.text}</Text>
             <TouchableOpacity onPress={() => handleRemoveItem(item.index)}>
-              <Text>Удалить</Text>
+              <Text style={{fontFamily: 'Montserrat-Regular'}}>Удалить</Text>
             </TouchableOpacity>
           </View>
         )}
