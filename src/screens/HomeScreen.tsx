@@ -64,10 +64,12 @@ const useStyles = (colors: IColors) =>
     titleText: {
       color: colors.textPrimary,
       fontSize: 20,
+      fontFamily: 'Montserrat-Regular'
     },
     mainText: {
       color: colors.textPrimary,
       fontSize: 15,
+      fontFamily: 'Montserrat-Regular'
     },
     buttonFirst: {
       width: 160,

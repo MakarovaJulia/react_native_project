@@ -19,7 +19,7 @@ type Props = {
 const AboutScreen: React.FC<Props> = ({navigation}) => {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>About Screen</Text>
+      <Text style={{fontFamily: 'Montserrat-Regular'}}>About Screen</Text>
       <Button onPress={() => navigation.goBack()} title="Go to Home screen" />
     </View>
   );

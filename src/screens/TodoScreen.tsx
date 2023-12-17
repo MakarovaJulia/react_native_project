@@ -73,14 +73,14 @@ const TodoScreen = observer(() => {
 
   const renderItem = ({item, index}: any) => (
     <View key={index}>
-      <Text>{item.text}</Text>
+      <Text style={{fontFamily: 'Montserrat-Regular'}}>{item.text}</Text>
     </View>
   );
 
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
-        <Text>NEW:</Text>
+        <Text style={{fontFamily: 'Montserrat-Regular'}}>NEW:</Text>
         {todosStore.todosModel && !todosStore.isLoading ? (
           <FlatList
             data={todosStore.todosModel.todoList}
@@ -127,7 +127,7 @@ const TodoScreen = observer(() => {
           onChangeText={newText => setText(newText)}
           value={text}
         />
-        <Button title=" ADD " onPress={() => addItem()} />
+        <Button title=" ADD " onPress={() => addItem()}/>
         <Button onPress={modalFunction} title="Go to done TODOs screen" />
       </View>
     </SafeAreaView>
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     padding: 8,
     marginTop: 16,
     marginBottom: 16,
+    fontFamily: 'Montserrat-Regular'
   },
   todoLineTouch: {},
 });

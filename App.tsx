@@ -34,6 +34,7 @@ const TabNavigation = () => {
         headerStyle: {backgroundColor: colors.overlay},
         headerTitleStyle: {
           color: colors.textPrimary,
+          fontFamily: 'Montserrat-Regular'
         },
       }}
       initialRouteName={'Home'}>

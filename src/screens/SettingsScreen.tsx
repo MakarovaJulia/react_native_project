@@ -3,7 +3,7 @@ import {Text, View} from 'react-native';
 export default function SettingsScreen({}) {
   return (
     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Settings</Text>
+      <Text style={{fontFamily: 'Montserrat-Regular'}}>Settings</Text>
     </View>
   );
 }
